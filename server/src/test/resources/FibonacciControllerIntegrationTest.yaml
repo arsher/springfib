@@ -1,0 +1,14 @@
+users:
+  - username: "testuser"
+    password: "testpassword"
+    enabled: true
+    maxnumber: 0
+  - username: "testuser2"
+    password: "testpassword"
+    enabled: true
+    maxnumber: 3
+authorities:
+  - authority: "USER"
+    username: "testuser"
+  - authority: "USER"
+    username: "testuser2"

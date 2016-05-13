@@ -1,0 +1,73 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: David Serfozo
+      changes:
+      - createTable:
+           tableName: users
+           columns:
+           - column:
+                name: username
+                type: varchar(255)
+                constraints:
+                    primaryKey: true
+                    nullable: false
+           - column:
+                name: password
+                type: varchar(255)
+                constraints:
+                    nullable: false
+           - column:
+                name: enabled
+                type: boolean
+                defaultValue: true
+                constraints:
+                    nullable: false
+           - column:
+                name: maxnumber
+                type: int
+                constraints:
+                    nullable: false
+      - createTable:
+           tableName: authorities
+           columns:
+           - column:
+                name: authority
+                type: varchar(50)
+                constraints:
+                    primaryKey: true
+                    nullable: false
+           - column:
+                name: username
+                type: varchar(255)
+                constraints:
+                    primaryKey: true
+                    nullable: false
+                    references: users(username)
+                    foreignKeyName: fk_authorities_users
+      - loadData:
+           columns:
+           - column:
+                name: username
+                type: string
+           - column:
+                name: password
+                type: string
+           - column:
+                name: enabled
+                type: boolean
+           - column:
+                name: maxnumber
+                type: numeric
+           tableName: users
+           file: net/serfozo/fibonacci/users.csv
+      - loadData:
+           columns:
+           - column:
+                name: username
+                type: string
+           - column:
+                name: authority
+                type: string
+           tableName: authorities
+           file: net/serfozo/fibonacci/authorities.csv

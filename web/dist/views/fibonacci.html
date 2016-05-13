@@ -1,0 +1,25 @@
+<div class="panel panel-default">
+    <div class="panel-heading">Parameters</div>
+    <div class="panel-body">
+        <form ng-submit="generate()">
+            <div class="form-group">
+                <label for="number">N:</label>
+                <input type="number" id="number" name="number" class="form-control" ng-model="number" required />
+            </div>
+            <div class="form-actions">
+                <button type="submit" ng-disabled="busy" class="btn btn-success">Generate</button>
+            </div>
+        </form>
+        <div ng-show="error" class="alert alert-danger">{{error}}</div>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Result</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="list-group" ng-repeat="r in result track by $index">
+            <li class="list-group-item">{{r}}</li>
+        </ul>
+    </div>
+</div>

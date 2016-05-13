@@ -1,0 +1,33 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.moowork.gradle:gradle-node-plugin:0.12'
+        classpath 'com.moowork.gradle:gradle-gulp-plugin:0.12'
+    }
+}
+
+apply plugin: 'com.moowork.gulp'
+
+task clear_dist(type:Delete) {
+    delete 'dist'
+}
+
+gulp_build.dependsOn 'installGulp'
+
+gulp_build.dependsOn 'npmInstall'
+
+gulp_build.dependsOn clear_dist
+
+task copy_dist(type:Copy) {
+    from 'dist'
+    include '**/*'
+    into '../server/src/main/resources/static'
+}
+
+copy_dist.dependsOn gulp_build
+
+build.dependsOn copy_dist
+
